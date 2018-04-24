@@ -15,7 +15,7 @@ The provided `docker-compose.yml` and Spark configurations in `conf` directory a
 
 ## Notes on working through the problems
 
-If you're not already familiar with [Apache Spark](http://spark.apache.org/), you'll need to go through its documentation for available APIs. The version that comes with the Docker Spark setup is `Spark v2.1`.
+If you're not already familiar with [Apache Spark](http://spark.apache.org/), you'll need to go through its documentation for available APIs. The version that comes with the Docker Spark setup depends on https://github.com/gettyimages/docker-spark.
 
 For jobs that rely on external dependencies and libraries, make sure they are properly packaged on submission.
 
