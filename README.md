@@ -26,4 +26,4 @@ df = spark.read.options(
 
 ## Submission
 
-Please host your solution as one or multiple Notebooks (`.ipynb`) in a public git remote repository and reply to the email thread with the link you initially received to work on this work sample.
+Please host your solution as one or multiple Notebooks (`.ipynb`) in a public git remote repository and reply with its link to the email thread you initially received to work on this work sample.
