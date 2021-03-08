@@ -22,6 +22,8 @@ df = spark.read.options(
 ).csv(os.path.expanduser('~/data/DataSample.csv'))
 ```
 
+![example](https://user-images.githubusercontent.com/2837532/110395132-9ff52100-803b-11eb-93c0-88b0a8e955e0.png)
+
 ## Submission
 
 Please host your solution as one or multiple Notebooks (`.ipynb`) in a public git remote repository and reply to the email thread with the link you initially received to work on this work sample.
