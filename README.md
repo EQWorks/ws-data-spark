@@ -1,27 +1,29 @@
-## Environment
+# Work Sample for Data Aspect, PySpark Variant
 
-Unless you already have a working [Apache Spark](http://spark.apache.org/) cluster, you will need to have [Docker](https://docs.docker.com/) for simple environment setup.
+[What is this for?](https://github.com/EQWorks/work-samples#what-is-this)
 
-The provided `docker-compose.yml` and Spark configurations in `conf` directory are cloned from <https://github.com/gettyimages/docker-spark>.
+## Environment setup
 
-## Setup
+If you already have a functioning Apache Spark configuration, you can use your own. For your convenience, the provided `docker-compose.yml` is based on the [`jupyter/pyspark-notebook`](https://github.com/jupyter/docker-stacks/tree/master/pyspark-notebook) image. You will need to have Docker and Docker Compose configured on your computer. Check out the [Docker Desktop documentation](https://docs.docker.com/desktop/) for details.
 
-0. Make sure Docker is installed properly and `docker-compose` is ready to use
-1. Run `$ docker-compose up -d` under the `data-mr` directory
-2. Check Spark UI at `http://localhost:8080` and you should see 1 master and 1 worker
-3. Run `$ docker exec -it datamr_master_1 /bin/bash` to get into the container shell, and start utilizing Spark commands such as `# spark-shell`, `# pyspark` or `# spark-submit`. You may want to replace `datamr_master_1` with actual container name that's spawned by the `docker-compose` process
+You can run `docker-compose up` and follow the prompt to open the Jupyter Notebook UI (looks like `http://127.0.0.1:8888/?token=<SOME_TOKEN>`).
 
-![demo.gif](https://user-images.githubusercontent.com/2837532/27649289-4fdffd52-5bff-11e7-9236-0a1d063461cb.gif)
+The given `data/` directory mounts as a Docker volume at `~/data/` for easy access:
 
-## Notes on working through the problems
+```python
+import os
+from pyspark.sql import SparkSession
 
-If you're not already familiar with [Apache Spark](http://spark.apache.org/), you'll need to go through its documentation for available APIs. The version that comes with the Docker Spark setup depends on https://github.com/gettyimages/docker-spark.
+spark = SparkSession.builder.master('local').getOrCreate()
+df = spark.read.options(
+    header='True',
+    inferSchema='True',
+    delimiter=',',
+).csv(os.path.expanduser('~/data/DataSample.csv'))
+```
 
-For jobs that rely on external dependencies and libraries, make sure they are properly packaged on submission.
+![example](https://user-images.githubusercontent.com/2837532/110395132-9ff52100-803b-11eb-93c0-88b0a8e955e0.png)
 
-On submission, we will need:
+## Submission
 
-1. Source code of the solution
-2. Build instructions for job packaging (unless your solution is a single `.py`), such as [Maven](https://maven.apache.org/) or [SBT](http://www.scala-sbt.org/) for Scala/Java, or `setup.py` for Python `.zip/.egg`
-
-Make sure the jobs can be submitted (through `spark-submit` command) in the Spark Master container shell. There is a `data` directory provided that maps between the Spark Master container and your host system, which is accessible as `/tmp/data` within the Docker container -- this is where you want to place both your jobs and work sample data, the latter is already included.
+Please host your solution as one or multiple Notebooks (`.ipynb`) in a public git remote repository and reply with its link to the email thread you initially received to work on this work sample.
